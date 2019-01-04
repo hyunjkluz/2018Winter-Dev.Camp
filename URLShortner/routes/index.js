@@ -1,12 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('main.html', {
-        title : "URL Shortner" 
-  });
-});
+router.use('/', require('./mainView.js'));
 
 router.use('/shortner', require('./shortner.js'));
 
