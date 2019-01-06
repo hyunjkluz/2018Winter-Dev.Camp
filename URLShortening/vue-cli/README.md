@@ -1,5 +1,6 @@
-# vue-cli
+# Project : URL Shortner
 
+* 2018 SmileGate Winter Dev Camp
 > A Vue.js project
 
 ## Build Setup

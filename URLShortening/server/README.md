@@ -22,12 +22,11 @@
 ```json
 "dependencies": {
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
-    "ejs": "^2.6.1",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
-    "mongoose": "^5.4.1",
     "morgan": "~1.9.0",
     "promise-mysql": "^3.3.1"
   }
