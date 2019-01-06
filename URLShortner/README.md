@@ -8,17 +8,13 @@
 
 * 프로젝트 설명 : 
 
-* 프로젝트 기간 : 2019년 1월 3일 ~ 
+* 프로젝트 기간 : 2019년 1월 3일 ~ 2019년 1월 6일
 
-* **API** : https://drive.google.com/open?id=1R3xawpKQGRNKueFD5Z2WRBhlBa6GxApGINF83aTWlbo
-
-
+* **API** : https://github.com/hyunjkluz/2018Winter-Dev.Camp/wiki
 
 
 ## DB
 * MySQL
-
-
 
 
 ## 의존성
@@ -48,15 +44,6 @@
 * Node.js의 버전을 7.6 이상으로 유지해야 합니다.
 
 
-
-## 배포
-
-* 운영기반 : [clayon platform PAS](https://www.clayon.io/)
-
-* 사용서비스 : clayon App Autoscaler, [mLab](https://mlab.com/)
-
-
-
 ## 사용된 도구
 
 * [Node.js](https://nodejs.org/ko/) - Chrome V8 자바스크립트 엔진으로 빌드된 자바스크립트 런타임
@@ -66,7 +53,6 @@
 * [NPM](https://rometools.github.io/rome/) - 자바 스크립트 패키지 관리자
 
 * [vscode](https://code.visualstudio.com/) - 편집기
-
 
 
 
