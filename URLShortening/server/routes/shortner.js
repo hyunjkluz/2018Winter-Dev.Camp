@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
             "message" : "Null Value : inputUrl"
         });
     } else {
-        inputUrl = inputUrl.split("https://")[1];
+        //inputUrl = inputUrl.split("https://")[1];
         console.log(inputUrl);
 
         let selectUrlQuery = "SELECT * FROM urlDict WHERE original = ?";
