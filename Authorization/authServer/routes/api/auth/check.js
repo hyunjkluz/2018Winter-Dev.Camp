@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../../module/pool');
+const util = require('../../../module/util');
 
 router.get('/', util.isLoggedin, async (req, res, next) => {
     let idx = req.decoded.idx;

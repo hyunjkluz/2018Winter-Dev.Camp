@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const crypto = require('crypto-promise');
+const moment = require('moment');
 
+//naming을 바꾸기(name space 충돌을 막자 + 가독성)
+const client = require('../../../module/redis');
 const db = require('../../../module/pool');
 const util = require('../../../module/util');
+const jwt = require('../../../module/jwt');
 
 router.post('/', async (req, res, next) => {
     let isValid = true;
@@ -34,29 +38,27 @@ router.post('/', async (req, res, next) => {
 
         if (!checkResult) {
             res.status(200).send(util.successFalse(null, 'Internal Server Error', 500));
-        } else if (checkResult === 1) {
+        } else if (checkResult.length === 1) {
             let hashedPw = await crypto.pbkdf2(pw, checkResult[0].salt, 100000, 32, 'sha512');
 
-            if (hashedPw.toString('base64') === checkResult[0].pw) {
-                var secretOrPrivateKey = "tmakdlfrpdlxm19!";
-                var options = {
-                    algorithm: "HMAC256",
-                    expiresIn: "5h",
-                    issure: "smilegate"
-                };
-                var payload = {
-                    idx: checkResult[0].idx,
-                    id: checkResult[0].id,
-                    name: checkResult[0].name
-                }
+            if (hashedPw.toString('base64') === checkResult[0].password) {
+                let token = jwt.sign(checkResult[0])
 
-                jwt.sign(payload, secretOrPrivateKey, options, (err, token) => {
-                    if (err) {
-                        res.status(200).send(util.successFalse(err, 'token fail', 500));
-                    } else {
-                        res.status(200).send(util.successTrue(token));
-                    }
-                });
+                if (!token) {
+                    res.status(200).send(util.successFalse(err, 'token fail', 500));
+                } else {
+                    let timeStamp = moment().format('YYYY-MM-DD hh:mm:ss').toString();
+
+                    //redis에 사용자 등록하기
+                    //remote ip 주소 등록 : 그것도 일치하는지 확인하자 
+                    client.del(token);             
+                    client.hmset(token, 'timeStamp', timeStamp);
+                    client.hgetall(token, (err, obj) => {
+                        console.log(obj.timeStamp);
+                    });
+                    
+                    res.status(200).send(util.successTrue(token));
+                }
             } else {
                 res.status(200).send(util.successFalse(null, 'Password Error', 400));
             }
